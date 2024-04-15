@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-image: url('Screenshot.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .form-container {
+            text-align: center;
+            width: 60%; /* Adjust width as needed */
+            max-width: 400px; /* Set maximum width */
+        }
+
+        h1 {
+            font-size: 80px; /* Increase font size for heading */
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        button {
+            display: block;
+            width: 100%;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 20px;
+            color: #fff;
+            background-color: #000;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #444;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>SIGN UP</h1>
+        <form id="signupForm">
+            <input type="text" id="fullName" placeholder="Full Name (characters only)" pattern="[A-Za-z ]+" title="Only characters are allowed" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="text" id="newUsername" placeholder="Username" required>
+            <input type="password" id="newPassword" placeholder="Password" required>
+            <label for="teamMember">Team Member</label>
+            <input type="checkbox" id="teamMember" name="teamRole" value="teamMember">
+            <label for="teamLeader">Team Leader</label>
+            <input type="checkbox" id="teamLeader" name="teamRole" value="teamLeader">
+            <button type="submit" id="submitButton" disabled>Sign Up</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const submitButton = document.getElementById("submitButton");
+
+            checkboxes.forEach(function(checkbox) {
+                checkbox.addEventListener("change", function() {
+                    checkboxes.forEach(function(otherCheckbox) {
+                        if (otherCheckbox !== checkbox) {
+                            otherCheckbox.checked = false;
+                        }
+                    });
+
+                    submitButton.disabled = !(checkboxes[0].checked || checkboxes[1].checked);
+                });
+            });
+
+            document.getElementById("signupForm").addEventListener("submit", function(event) {
+                event.preventDefault();
+                if (document.getElementById("teamLeader").checked) {
+                    window.location.href = "header2.html";
+                } else if (document.getElementById("teamMember").checked) {
+                    window.location.href = "header.html";
+                }
+            });
+        });
+    </script>
+</body>
+</html>

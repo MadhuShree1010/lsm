@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To-Do List</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-image: url('Screenshot1.jpg');
+        background-size: cover;
+        font-family: Arial, sans-serif;
+        color: white;
+    }
+    .container {
+        width: 80%;
+        margin: 50px auto;
+    }
+    .form-container {
+        background: rgba(0, 0, 0, 0.5);
+        padding: 20px;
+        border-radius: 10px;
+    }
+    input[type="text"], input[type="datetime-local"], input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        box-sizing: border-box;
+        border: none;
+        border-radius: 5px;
+    }
+    input[type="submit"] {
+        background-color: #000;
+        color: #fff;
+        cursor: pointer;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #fff;
+    }
+    th {
+        background-color: #000;
+    }
+    .delete-btn {
+        background-color: #ff4d4d;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="form-container">
+        <form id="todoForm">
+            <input type="text" id="work" placeholder="Enter your task" required>
+            <input type="datetime-local" id="datetime" min="<?php echo date('Y-m-d\TH:i'); ?>" required>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <table id="todoList">
+        <thead>
+            <tr>
+                <th>Work</th>
+                <th>Date of Completion</th>
+                <th>Completed</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Tasks will be dynamically added here -->
+        </tbody>
+    </table>
+</div>
+
+<script>
+    // Function to add task to the to-do list
+    function addTask(work, datetime) {
+        var table = document.getElementById('todoList').getElementsByTagName('tbody')[0];
+        var newRow = table.insertRow(table.rows.length);
+        var cell1 = newRow.insertCell(0);
+        var cell2 = newRow.insertCell(1);
+        var cell3 = newRow.insertCell(2);
+        var cell4 = newRow.insertCell(3);
+        cell1.innerHTML = work;
+        cell2.innerHTML = datetime;
+        cell3.innerHTML = '<input type="checkbox">';
+        cell4.innerHTML = '<button class="delete-btn">Delete</button>';
+        // Save tasks to local storage
+        saveTasksToLocalStorage();
+    }
+
+    // Function to delete a task
+    function deleteTask(row) {
+        row.parentNode.removeChild(row);
+        // Save tasks to local storage
+        saveTasksToLocalStorage();
+    }
+
+    // Function to save tasks to local storage
+    function saveTasksToLocalStorage() {
+        var tasks = [];
+        var rows = document.getElementById('todoList').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+        for (var i = 0; i < rows.length; i++) {
+            var task = {
+                work: rows[i].cells[0].innerText,
+                datetime: rows[i].cells[1].innerText
+            };
+            tasks.push(task);
+        }
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+
+    // Function to load tasks from local storage
+    function loadTasksFromLocalStorage() {
+        var tasks = JSON.parse(localStorage.getItem('tasks'));
+        if (tasks) {
+            for (var i = 0; i < tasks.length; i++) {
+                addTask(tasks[i].work, tasks[i].datetime);
+            }
+        }
+    }
+
+    // Load tasks from local storage when the page loads
+    window.onload = function() {
+        loadTasksFromLocalStorage();
+    };
+
+    document.getElementById('todoForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var work = document.getElementById('work').value;
+        var datetime = document.getElementById('datetime').value;
+        if (new Date(datetime) > new Date()) {
+            addTask(work, datetime);
+        } else {
+            alert('Please select a future date and time!');
+        }
+        // Clear form fields
+        document.getElementById('work').value = '';
+        document.getElementById('datetime').value = '';
+    });
+
+    // Event delegation for delete buttons
+    document.getElementById('todoList').addEventListener('click', function(e) {
+        if (e.target.classList.contains('delete-btn')) {
+            deleteTask(e.target.parentNode.parentNode);
+        }
+    });
+</script>
+</body>
+</html>

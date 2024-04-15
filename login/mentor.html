@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentor List</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('Screenshot1.jpg');
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+        table {
+            width: 80%;
+            margin: 50px auto;
+            border-collapse: collapse;
+            color: black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid black;
+        }
+        th {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Mentor Name</th>
+                <th>Mentor Email</th>
+                <th>Mentor Experience</th>
+            </tr>
+        </thead>
+        <tbody id="mentorList">
+            <!-- Mentor details will be dynamically added here -->
+        </tbody>
+    </table>
+
+    <script>
+        // Load mentor list from local storage on page load
+        window.onload = function() {
+            loadMentorListFromStorage();
+        };
+
+        // Function to load mentor list from local storage
+        function loadMentorListFromStorage() {
+            var mentorList = JSON.parse(localStorage.getItem('mentorList'));
+            if (mentorList) {
+                var tableBody = document.getElementById('mentorList');
+                mentorList.forEach(function(mentor, index) {
+                    var row = tableBody.insertRow();
+                    row.insertCell(0).textContent = index + 1;
+                    row.insertCell(1).textContent = mentor.name;
+                    row.insertCell(2).textContent = mentor.email;
+                    row.insertCell(3).textContent = mentor.experience;
+                });
+            }
+        }
+    </script>
+</body>
+</html>

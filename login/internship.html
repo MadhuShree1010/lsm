@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Table Page</title>
+    <style>
+        body {
+            background-image: url("Screenshot1.jpg");
+            background-size: cover;  
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            width: 80%; /* Adjust as needed */
+        }
+        .section {
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            width: 48%; /* Adjust as needed */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+            color: black;
+        }
+        input[type="text"] {
+            width: calc(100% - 80px); /* Adjust as needed */
+            padding: 5px;
+            border: 1px solid black;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        #addBtn {
+            padding: 5px 10px;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #addBtn:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="section" id="tableSection">
+            <h2>Link Table</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sno</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody id="linkTableBody">
+                    <!-- Table content will be dynamically added here -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section" id="addSection">
+            <h2>Add Link</h2>
+            <input type="text" id="linkInput" placeholder="Enter link">
+            <button id="addBtn">Add</button>
+        </div>
+    </div>
+
+    <script>
+        const linkTableBody = document.getElementById("linkTableBody");
+        const linkInput = document.getElementById("linkInput");
+        const addBtn = document.getElementById("addBtn");
+        let sno = 1;
+
+        addBtn.addEventListener("click", function() {
+            const link = linkInput.value.trim();
+
+            if (link !== "") {
+                const newRow = document.createElement("tr");
+                newRow.innerHTML = `
+                    <td>${sno}</td>
+                    <td>${link}</td>
+                `;
+                linkTableBody.appendChild(newRow);
+                linkInput.value = "";
+                sno++;
+            }
+        });
+    </script>
+</body>
+</html>

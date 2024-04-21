@@ -25,11 +25,11 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Username:', username);
         console.log('Password:', password);
 
-        // Send login credentials to the server for authentication
-        // Assume successful login for demonstration purposes
+        // Send Template credentials to the server for authentication
+        // Assume successful Template for demonstration purposes
         // Replace this with actual authentication logic
 
-        // Redirect to the home page after successful login
+        // Redirect to the home page after successful Template
         window.location.href = '/home.html'; // Replace 'home.html' with the URL of your home page
     });
 

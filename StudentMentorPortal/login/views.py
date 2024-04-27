@@ -6,8 +6,7 @@ from django.shortcuts import render, redirect
 from django.template import RequestContext
 from django.views.decorators.cache import cache_control
 from django.views.decorators.csrf import csrf_protect, csrf_exempt, requires_csrf_token
-import requests
-from . import models
+
 
 
 def landingPage(request):

@@ -1,13 +1,14 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
-    <link rel="stylesheet" href="../static/stylesheet/styles.css">
+    <link rel="stylesheet" href="../static/style/styles.css">
     <style>
         body {
-            background-image: url('StudentMentorPortal/static/images/Screenshot.jpg');
+            background-image: url("{% static 'images/Screenshot.jpg' %}");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -87,9 +88,9 @@
             document.getElementById("signupForm").addEventListener("submit", function(event) {
                 event.preventDefault();
                 if (document.getElementById("teamLeader").checked) {
-                    window.location.href = "header2.html";
+                    window.location.href = "student/header2";
                 } else if (document.getElementById("teamMember").checked) {
-                    window.location.href = "header.html";
+                    window.location.href = "student/header";
                 }
             });
         });

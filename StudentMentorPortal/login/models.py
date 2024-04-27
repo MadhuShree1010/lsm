@@ -3,7 +3,7 @@ from django.db import models
 
 class Student(models.Model):
     Username = models.CharField(max_length=50,unique=True)
-    password = models.CharField(min_length=6)
+    password = models.CharField()
     leader = models.BooleanField(default=False)
 
 

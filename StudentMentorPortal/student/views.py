@@ -26,7 +26,7 @@ def mentors(request):
 def diary(request):
     return render(request,"diary.html")
 
-def assignTask(request):
+def Task(request):
     return render(request,"task.html")
 
 

@@ -81,11 +81,12 @@
     <div class="form-container">
         <h1>LOGIN</h1>
         <form id="loginForm">
+            {% csrf_token %}
             <input type="text" id="username" placeholder="Username" required>
             <input type="password" id="password" placeholder="Password" required>
-            <label for="teamMember">Team Member</label>
+            <label for="teamMember">Team Leader</label>
             <input type="checkbox" id="teamMember" name="role" value="team_member">
-            <label for="teamLeader">Team Leader</label>
+            <label for="teamLeader">Team Member</label>
             <input type="checkbox" id="teamLeader" name="role" value="team_leader">
         </form>
         <div class="header-link">

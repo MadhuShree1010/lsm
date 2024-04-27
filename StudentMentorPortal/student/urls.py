@@ -7,5 +7,5 @@ urlpatterns=[
     path("todo", views.todo, name="todo"),
     path("mentors", views.mentors, name="mentors"),
     path("diary", views.diary, name="diary"),
-    path("assign-task", views.assignTask, name="assignTask"),
+    path("task", views.Task, name="Task"),
 ]

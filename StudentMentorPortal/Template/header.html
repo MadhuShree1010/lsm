@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{% static 'style/styles.css' %}">
     <style>
         body {
-            background-image: url('../static/images/Screenshot2.jpg');
+            background-image: url('{% static 'images/Screenshot2.jpg' %}');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -57,10 +57,9 @@
 </head>
 <body>
     <div class="taskbar">
-        <a href="todo.html">TO DO</a>
-        <a href="internship.html">INTERNSHIPS</a>
-        <a href="diary.html">DIARY</a>
-        <a href="mentor.html">MENTOR</a>
+        <a href="todo">TO DO</a>
+        <a href="diary">DIARY</a>
+        <a href="mentors">MENTOR</a>
     </div>
 
     <div class="container">

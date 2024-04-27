@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +7,7 @@
     <title>Link Table Page</title>
     <style>
         body {
-            background-image: url("StudentMentorPortal/static/images/Screenshot1.jpg");
+            background-image: url("{% static 'images/Screenshot1.jpg' %}");
             background-size: cover;  
             background-repeat: no-repeat;
             background-position: center;

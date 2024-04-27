@@ -71,8 +71,11 @@
 </head>
 <body>
     <div class="container">
-        <textarea id="diaryEntry" placeholder="Write your diary entry here..."></textarea>
-        <button onclick="submitEntry()">Submit</button>
+        <form method="post" action="{% url 'save_entry' %}">
+            {% csrf_token %}
+            <textarea name="entry" id="diaryEntry" placeholder="Write your diary entry here..."></textarea>
+            <button type="submit">Submit</button>
+        </form>
 
         <table id="diaryTable">
             <thead>
@@ -93,26 +96,6 @@
             loadEntriesFromStorage();
         };
 
-        function submitEntry() {
-            var entry = document.getElementById('diaryEntry').value.trim();
-            if (entry !== '') {
-                var table = document.getElementById('diaryTable').getElementsByTagName('tbody')[0];
-                var newRow = table.insertRow(table.rows.length);
-                var dayCell = newRow.insertCell(0);
-                var entryCell = newRow.insertCell(1);
-
-                dayCell.textContent = 'Day ' + (table.rows.length);
-                entryCell.innerHTML = '<div>' + entry + '</div><button onclick="toggleEntryDetails(this)">Show</button>';
-
-                // Save entry to local storage
-                saveEntryToStorage(table.rows.length, entry);
-
-                document.getElementById('diaryEntry').value = ''; // Clear the text area after submission
-            } else {
-                alert('Please enter a diary entry!');
-            }
-        }
-
         function toggleEntryDetails(button) {
             var entryDetails = button.nextElementSibling;
             var entryContent = entryDetails.previousElementSibling;
@@ -123,11 +106,6 @@
                 entryDetails.style.display = 'none';
                 button.textContent = 'Show';
             }
-        }
-
-        // Save entry to local storage
-        function saveEntryToStorage(day, entry) {
-            localStorage.setItem('diaryEntry_' + day, entry);
         }
 
         // Load diary entries from local storage
